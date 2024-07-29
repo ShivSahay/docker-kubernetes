@@ -9,6 +9,7 @@ const {
   sendForgotPasswordMail,
 } = require("../utils/nodemailer");
 
+// Return generated OTP
 const generateOtp = async () => {
   let otp = generate(6, {
     upperCaseAlphabets: true,
@@ -17,6 +18,17 @@ const generateOtp = async () => {
   });
   return otp;
 };
+
+/**
+ * @description Used for signup user
+ * @param {String} firstName
+ * @param {String} lastName
+ * @param {String} email
+ * @param {String} password
+ * @param {String} phoneNumber
+ * @param {String} about
+ * @returns {object} - Return user details , success message and status code
+ */
 
 const userSignUp = async (req, res) => {
   let otp = await generateOtp();
@@ -75,6 +87,13 @@ const userSignUp = async (req, res) => {
   });
 };
 
+/**
+ * @description Used for verify  user
+ * @param {String} email
+ * @param {String} otp
+ * @returns {object} - Return user details , success message and status code
+ */
+
 const verifyUser = async (req, res) => {
   try {
     let { email, otp } = req.body;
@@ -120,6 +139,12 @@ const verifyUser = async (req, res) => {
   }
 };
 
+/**
+ * @description Used for login  user
+ * @param {String} email
+ * @param {String} password
+ * @returns {object} - Return user details , success message and status code
+ */
 const userSignIn = async (req, res) => {
   try {
     let { password, email } = req.body;
@@ -158,6 +183,11 @@ const userSignIn = async (req, res) => {
   }
 };
 
+/**
+ * @description Used for forgot password
+ * @param {String} email
+ * @returns {object} - Return otp, success message and status code
+ */
 const forgotPassword = async (req, res) => {
   try {
     let { email } = req.body;
@@ -191,6 +221,12 @@ const forgotPassword = async (req, res) => {
   }
 };
 
+/**
+ * @description Used for verify forgot password otp
+ * @param {String} email
+ * @param {String} otp
+ * @returns {object} - Return otp, success message and status code
+ */
 const verifyOtp = async (req, res) => {
   try {
     let { email, otp } = req.body;
@@ -215,11 +251,17 @@ const verifyOtp = async (req, res) => {
   }
 };
 
+/**
+ * @description Used for reset password
+ * @param {String} email
+ * @param {String} newPassword
+ * @returns {object} - Return success message and status code
+ */
 const resetPassword = async (req, res) => {
   try {
-    let { email, password } = req.body;
+    let { email, newPassword } = req.body;
     const salt = await bcrypt.genSalt(10);
-    const encryptedPassword = await bcrypt.hash(password, salt);
+    const encryptedPassword = await bcrypt.hash(newPassword, salt);
     await userModel.findOneAndUpdate(
       { email: email },
       {
@@ -243,5 +285,5 @@ module.exports = {
   userSignIn,
   forgotPassword,
   verifyOtp,
-  resetPassword
+  resetPassword,
 };

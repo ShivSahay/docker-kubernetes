@@ -1,10 +1,12 @@
 const jwt = require("jsonwebtoken");
 const userSecret = process.env.USER_SECRET || "userAuth0";
 
+// Create user access token
 exports.jwtSign = async (data) => {
   return jwt.sign(data, userSecret);
 };
 
+// Verify access token
 exports.userAuth = (req, res, next) => {
   try {
     let token = req.headers.accesstoken;

@@ -1,5 +1,6 @@
 var nodemailer = require("nodemailer");
 
+// config node mailer
 var transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
@@ -8,7 +9,8 @@ var transporter = nodemailer.createTransport({
   },
 });
 
-exports.sendForgotPasswordMail = async (email, otp) => {
+// Sent forgot password otp through email
+const sendForgotPasswordMail = async (email, otp) => {
   let emailTemplate = otp;
   let mailOptions = {
     from: "shivnirvaat@gmail.com",
@@ -25,7 +27,8 @@ exports.sendForgotPasswordMail = async (email, otp) => {
   });
 };
 
-exports.sendVerificationMail = async (email, otp) => {
+// Sent verification otp through email
+const sendVerificationMail = async (email, otp) => {
   let emailTemplate = await otp;
   let mailOptions = {
     from: "shivnirvaat@gmail.com",
@@ -42,3 +45,7 @@ exports.sendVerificationMail = async (email, otp) => {
   });
 };
 
+module.exports = {
+  sendForgotPasswordMail,
+  sendVerificationMail,
+};

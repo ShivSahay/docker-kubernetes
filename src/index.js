@@ -8,7 +8,7 @@ const userRouter = require("./router/user");
 dotenv.config();
 const connectDb = require("./config/connectDb");
 
-
+// connect mongodb database
 connectDb();
 
 

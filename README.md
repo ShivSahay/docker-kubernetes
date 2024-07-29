@@ -14,12 +14,13 @@ This project includes a Docker setup to streamline development, testing, and dep
 #docker commonds
 
 1. docker build -t imagename . 
-2. docker images
-3. docker run -d -p 4000:4000 imagename
-4. docker ps
-5. docker rm -f imageId  #dalete the container 
-6. docker login
-7. docker push imagename:tagname
+2. docker image tag SOURCE_IMAGE[:TAG] TARGET_IMAGE[:TAG]
+3. docker images
+4. docker run -d -p 4000:4000 imagename  #tag port no and run the container
+5. docker ps
+6. docker rm -f imageId  #dalete the container 
+7. docker login
+8. docker push imagename:tagname
 
 #kubernates deployments
 
@@ -31,6 +32,7 @@ This project includes a Docker setup to streamline development, testing, and dep
 6. kubectl apply -f k8s/user.yaml
 7. kubectl get deployment
 8. kubectl get pods
-9. kubectl logs deployments name
+9. kubectl logs  pod name
 10. kubectl get svc
 11. minikube service service-name
+12. minikube delete
