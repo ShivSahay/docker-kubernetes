@@ -4,8 +4,8 @@ var nodemailer = require("nodemailer");
 var transporter = nodemailer.createTransport({
   service: "gmail",
   auth: {
-    user: "shivnirvaat@gmail.com",
-    pass: "jenulfwthjzsakmg",
+    user: process.env.USERAUTHEMAIL,
+    pass: process.env.USERAUTHPASS,
   },
 });
 
@@ -13,7 +13,7 @@ var transporter = nodemailer.createTransport({
 const sendForgotPasswordMail = async (email, otp) => {
   let emailTemplate = otp;
   let mailOptions = {
-    from: "shivnirvaat@gmail.com",
+    from: process.env.USERAUTHEMAIL,
     to: email,
     subject: "OTP for Forgot Password",
     html: `${emailTemplate}`,
@@ -31,7 +31,7 @@ const sendForgotPasswordMail = async (email, otp) => {
 const sendVerificationMail = async (email, otp) => {
   let emailTemplate = await otp;
   let mailOptions = {
-    from: "shivnirvaat@gmail.com",
+    from: process.env.USERAUTHEMAIL,
     to: email,
     subject: "OTP for Email Verification",
     html: `${emailTemplate}`,

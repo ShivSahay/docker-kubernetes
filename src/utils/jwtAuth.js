@@ -2,12 +2,12 @@ const jwt = require("jsonwebtoken");
 const userSecret = process.env.USER_SECRET || "userAuth0";
 
 // Create user access token
-exports.jwtSign = async (data) => {
+const jwtSign = async (data) => {
   return jwt.sign(data, userSecret);
 };
 
 // Verify access token
-exports.userAuth = (req, res, next) => {
+const userAuth = (req, res, next) => {
   try {
     let token = req.headers.accesstoken;
     jwt.verify(token, userSecret, (err, decode) => {
@@ -19,4 +19,9 @@ exports.userAuth = (req, res, next) => {
   } catch (error) {
     return res.status(401).send({ message: error });
   }
+};
+
+module.exports = {
+  jwtSign,
+  userAuth,
 };
