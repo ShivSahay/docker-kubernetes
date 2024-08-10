@@ -1,3 +1,10 @@
+/**
+ * This file is part of User Authentication
+ *------------------------------------------------------
+ *@module User Authentication module
+ *@developer Shiv Sahay Pandey
+ */
+
 const User = require("../Modals/User");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");

@@ -3,7 +3,7 @@ const userSecret = process.env.USER_SECRET || "userAuth0";
 
 // Create user access token
 const jwtSign = async (data) => {
-  return jwt.sign(data, userSecret);
+  return jwt.sign(data, userSecret, { expiresIn: "3600s" });
 };
 
 // Verify access token
